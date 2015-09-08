@@ -23,7 +23,7 @@ GLfloat rad(int h){
   return h*3.14/180;
 }
  
-void HSItoRGB(GLfloat h, GLfloat s, GLfloat i, int pos){
+void convert(GLfloat h, GLfloat s, GLfloat i, int pos){
  
     GLfloat r, g, b;
  
@@ -70,10 +70,10 @@ void timer(int value){
     if (h3 > 360) h3=0;
     if (h4 > 360) h4=0;
  
-    HSItoRGB(h1, s1, i1, 1);
-    HSItoRGB(h2, s2, i2, 2);
-    HSItoRGB(h3, s3, i3, 3);
-    HSItoRGB(h4, s4, i4, 4);
+    convert(h1, s1, i1, 1);
+    convert(h2, s2, i2, 2);
+    convert(h3, s3, i3, 3);
+    convert(h4, s4, i4, 4);
  
     glutPostRedisplay();
     glutTimerFunc(10, timer, 1);
@@ -85,17 +85,16 @@ void display(void){
  
     glClear(GL_COLOR_BUFFER_BIT);
     glBegin(GL_POLYGON);
-        glColor3f (r1, g1, b1);
-        glVertex2f(0.1,0.1);
- 
-        glColor3f (r2, g2, b2);
-        glVertex2f(0.9,0.1);
- 
-        glColor3f (r3, g3, b3);
-        glVertex2f(0.9,0.9);
- 
-        glColor3f (r4, g4, b4);
-        glVertex2f(0.1,0.9);
+    glColor3f (r1, g1, b1);
+    
+    glVertex2f(0.1,0.1);
+    glColor3f (r2, g2, b2);
+    glVertex2f(0.9,0.1);
+    glColor3f (r3, g3, b3);
+    glVertex2f(0.9,0.9);
+    glColor3f (r4, g4, b4);
+    glVertex2f(0.1,0.9);
+    
     glEnd();
  
  
