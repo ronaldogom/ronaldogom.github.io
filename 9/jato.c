@@ -8,7 +8,6 @@
 
 #define COORD_TEXTURA_PLANO 1.0
 #define COORD_TEXTURA_AVIAO 1.0
-#define COORD_TEXTURA_CAUDA 1.0
 #define COR_DO_PLANO 0.52,0.52,0.78,1.0
 #define COR_DO_AVIAO 0.3,0.52,0.18,1.0
 #define TEXTURA_DO_PLANO "montanhas.png"
@@ -29,7 +28,7 @@ GLshort texturas=1;
 GLfloat tetaxz=0;
 GLfloat raioxz=6;
 GLuint  jato;
-GLuint  rabo;
+GLuint  logotipo;
 
 GLfloat ctp[4][2]={
   {-COORD_TEXTURA_PLANO,-COORD_TEXTURA_PLANO},
@@ -43,13 +42,6 @@ GLfloat cta[4][2]={
   {+COORD_TEXTURA_AVIAO,-COORD_TEXTURA_AVIAO},
   {+COORD_TEXTURA_AVIAO,+COORD_TEXTURA_AVIAO},
   {-COORD_TEXTURA_AVIAO,+COORD_TEXTURA_AVIAO}
-};
-
-GLfloat ctc[4][2]={
-  {-COORD_TEXTURA_CAUDA,-COORD_TEXTURA_CAUDA},
-  {+COORD_TEXTURA_CAUDA,-COORD_TEXTURA_CAUDA},
-  {+COORD_TEXTURA_CAUDA,+COORD_TEXTURA_CAUDA},
-  {-COORD_TEXTURA_CAUDA,+COORD_TEXTURA_CAUDA}
 };
 
 void reshape(int width, int height){
@@ -76,6 +68,13 @@ void compoe_jato(void){
     {0.0,2.0,-1.0},
     {0.0,2.0,0.0},
     {0.0,0.0,2.0}
+  };
+
+  GLfloat logt[][3]={
+    {0.0,0.7,-0.7},
+    {0.0,0.7,0.0},
+    {0.0,0.0,0.0},
+    {0.0,0.0,-0.7}
   };
   /* inicia a composicao do jato */
   jato = glGenLists(1);
@@ -135,10 +134,10 @@ void compoe_jato(void){
 
     /* cauda */
   glBegin(GL_POLYGON);
-  glTexCoord2fv(ctc[0]); glVertex3fv(cauda[1]);
-  glTexCoord2fv(ctc[1]); glVertex3fv(cauda[2]);
-  glTexCoord2fv(ctc[2]); glVertex3fv(cauda[3]);
-  glTexCoord2fv(ctc[3]); glVertex3fv(cauda[0]);
+  glTexCoord2fv(cta[0]); glVertex3fv(cauda[1]);
+  glTexCoord2fv(cta[1]); glVertex3fv(cauda[2]);
+  glTexCoord2fv(cta[2]); glVertex3fv(cauda[3]);
+  glTexCoord2fv(cta[3]); glVertex3fv(cauda[0]);
   glEnd();
 
   /* cabine do piloto */
@@ -155,12 +154,18 @@ void compoe_jato(void){
   /* termina a composicao do jato*/
   glEndList();
 
-  //rabo = glGenLists(1);
-//  //glNewList(rabo, GL_COMPILE);
-//
-//
-//
-  //glEndList();
+  logotipo = glGenLists(1);
+  glNewList(logotipo, GL_COMPILE);
+
+  glEnable(GL_TEXTURE_2D);
+  glBegin(GL_POLYGON);
+  glTexCoord2fv(cta[0]); glVertex3fv(logt[2]);
+  glTexCoord2fv(cta[1]); glVertex3fv(logt[3]);
+  glTexCoord2fv(cta[2]); glVertex3fv(logt[0]);
+  glTexCoord2fv(cta[3]); glVertex3fv(logt[1]);
+  glEnd();
+  
+  glEndList();
 
 
 }
@@ -206,10 +211,15 @@ void display(void){
   glBindTexture(GL_TEXTURE_2D,textura_aviao);
   glCallList(jato);
 
-  //glTranslatef(0.0,-0.3,-3.5);
-  //glColor4f(0.65, 0.65, 0.65, 1.0);
-  //glBindTexture(GL_TEXTURE_2D,textura_aviao);
-  //glCallList(rabo);
+  glTranslatef(0.01,0.7,-3.3);
+  glColor4f(0.65, 0.65, 0.65, 1.0);
+  glBindTexture(GL_TEXTURE_2D,logo);
+  glCallList(logotipo);
+
+  glTranslatef(-0.02,0.0,0.0);
+  glColor4f(0.65, 0.65, 0.65, 1.0);
+  glBindTexture(GL_TEXTURE_2D,logo);
+  glCallList(logotipo);
 
   glPopMatrix();
   // volta para a ultima transformacao  
@@ -232,10 +242,10 @@ void display(void){
   glBindTexture(GL_TEXTURE_2D,textura_aviao);
   glCallList(jato);
 
-  //glTranslatef(0.0,-0.3,-3.5);
-  //glColor4f(0.65, 0.65, 0.65, 1.0);
-  //glBindTexture(GL_TEXTURE_2D,textura_aviao);
-  //glCallList(rabo);
+  glTranslatef(0.01,0.7,-3.3);
+  glColor4f(0.65, 0.65, 0.65, 1.0);
+  glBindTexture(GL_TEXTURE_2D,logo);
+  glCallList(logotipo);
   glPopMatrix();
   // volta para a ultima transformacao
 
