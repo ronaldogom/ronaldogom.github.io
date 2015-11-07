@@ -84,7 +84,7 @@ p {
 ul, ol, li > p {
   margin-top: 0;
 }
-ul > li     { color: #aaa; }
+ul > li     { color: black; }
 ul > li > * { color: black; }
 
 .monospaced, code, pre {
@@ -885,19 +885,119 @@ Q2: Baseado no programa anterior, o programa "braco-garra-3d" cria um braço rob
 </div>
 
 <div class="sect1">
+<h2 id="_exercício_4">- Exercício 6</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Q1: Baseado no programa de exemplo, foi implementado o programa tiposprojecoes o qual desempenha a função de exibir as faces do objeto de acordo com os comandos pedidos, tais comandos são: t e f, para exibir o topo e o fundo do objeto, F e T, para mostrar a frente e a face traseira, e e d, para mostrar a faces esquerda e direita, respectivamente, e a tecla c, para mostrar o triângulo do canto.
+<p>
+	Para exibir exatamente cada face, foi necessário calcular quantos graus rotacionar o objeto para que a face requisitada seja exibida, por exemplo: Para exibir a face frontal temos que rotacionar o objeto para zero graus em x e zero graus em y, para exibir a face de trás temos que rotacionar o objeto para zero graus em x e cento e oitenta graus em y.
+</p>
+
+<p>
+	No código, foram usados comandos como: Caso a tecla F seja selecionada então eixoy = (0 % 360) e eixox = (0 % 360) e PostRedisplay();
+  
+  	Caso a tecla T seja selecionada então eixoy = (180 % 360) e eixox = (0 % 360) e PostRedisplay();
+</P>
+</p>
+</li>
+<div class="imageblock">
+<div class="content">
+<img src="images/tiposdeprojecoes1.png" alt="images/tiposdeprojecoes1.png" />
+<img src="images/tiposdeprojecoes2.png" alt="images/tiposdeprojecoes2.png" />
+</div>
+</div>
+<li>
+	Q2: Tomando como base o programa exemplo, foi implementado o programa proj_anime cuja função é exibir um objeto animado seguindo as características indicadas no enunciado do problema.
+
+	<p>
+		Utilizando a função glutIdleFunc() e a função idle(), é possível fazer com que o programa execute um techo de código em loop enquanto nenhum outro comando seja executado. Para manter o objeto se movendo, a função idle() executa o seguinte código:</b>
+
+		usleep(10000);</b>
+  		eixoy = (eixoy + 4) % 360;</b>
+  		eixox = (eixox + 2) % 360;</b>
+  		glutPostRedisplay();</b>
+	</p>
+</li>
+<div class="imageblock">
+	<div class="content">
+	<img src="images/proj_anime.gif" alt="images/proj_anime.gif" />
+	</div>
+	</div>
+</ul></div>
+
 <h2 id="_exercício_4">- Exercício 7</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-Nessa atividade foi requerido a implementação, em opengl, do desenho de uma curva em NURBS com a opção de escolher os vetores de nós para representar a curva. Os três tipos de vetores são: vetores uniformes, vetores não uniformes e vetores uniformes abertos.
-Inicialmente foram criados mais dois vetores, um de nós uniformes e um de nós não uniformes, uma vez que o original é de nós abertos uniformes. Para mudar entre vetores foi implementada uma função para copiar os valores do vetor selecionado para 
+Q1: O programa splinesnurbs demostra como a spline vai se comportar para cada tipo de vetor: uniforme, não uniforme e uniforme aberto. Para mostrar o que cada vetor causa na spline foram criados 3 vetores, um de cada tipo, e para cada tecla um vetor específico é selecionado para a exibição, isso é possível copiando, usando a função copy(), o vetor selecionado para ser exibido e chamando a função glutPostRedisplay().
+</p>
+
+<p>Vetor de nodos uniformes:
+<div class="imageblock">
+<div class="content">
+<img src="images/u.png" alt="images/u.png" />
+</div>
+</div>
+</p>
+
+<p>Vetor de nodos não uniformes:
+<div class="imageblock">
+<div class="content">
+<img src="images/n_u.png" alt="images/n_u.png" />
+</div>
+</div>
+</p>
+
+<p>Vetor de nodos uniforme abertos:
+<div class="imageblock">
+<div class="content">
+<img src="images/u_aberto.png" alt="images/u_aberto.png" />
+</div>
+</div>
+</p>
+
+</li>
+</ul>
+</div>
+
+<h2 id="_exercício_4">- Exercício 8</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Q1: A implementação nesse passo pede para que seja possível modificar a superfície NURBS em tempo real, interagindo com os pontos de interação com a superfície. Por problemas ná implementação só se tornou possível interagir com apenas um dos pontos da superfície, portanto implementação ficou incompleta.
 </p>
 </li>
 </ul></div>
 <div class="imageblock">
 <div class="content">
-<img src="images/braco-garra.png" alt="images/braco-garra.png" />
+<img src="images/splineinter.png" alt="images/splineinter.png" />
+</div>
+</div>
+
+<h2 id="_exercício_4">- Exercício 9</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Q1: O problema consiste em ter um caça a jato que não possui turbina e nem misseis então não é capas de voar e nem abater seus inimigos, portanto devemos incrementar o nosso caça a jato. Para modelar a turbina do caça bastou apenas criar um cilindro cujo raio na ponta colada com o jato fosse menor que o raio da outra extremidade, para isso usamos gluCylinder(quadric, 0.7, 0.25, 1, 12, 3) após uma chamada da função glTranslatef() para levar a turbina para sua respectiva posição.
+</p>
+<p>
+	Para criar os misseis bastou copiar o corpo do jato mas sem as asas e calda, mas também foi necessário redimensionar os misseis para que ficassem com o tamanho correto. Para que os misseis ficassem nas suas posições também usamos a função glTranslatef() para cada missil.
+</p>
+<p>
+Q2: Nesse passo, após tornar nosso jato operante, devemos incrementar seu visual colocando um logo na sua calda. Para colocar uma imagem na calda foi necessário criar dois poligonos, um de cada lado, mas com um detalhe que é posicionar os poligonos um pouco "acima" da calda, ou seja, na frente dos lados da calda usando a função glTranslatef(), após isso chamamos as funções glBindTexture() com a textura da logo e a função glCallList() para desenhar a lista de poligonos que contem apenas um poligono, o correspondente ao do logo.
+</p>
+
+</li>
+</ul></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/jato.png" alt="images/jato.png" />
+<img src="images/jato2.png" alt="images/jato2.png" />
 </div>
 </div>
 
@@ -905,7 +1005,7 @@ Inicialmente foram criados mais dois vetores, um de nós uniformes e um de nós 
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-07 22:38:24 BRT
+Last updated 2015-11-07 18:01:24 BRT
 </div>
 </div>
 </body>

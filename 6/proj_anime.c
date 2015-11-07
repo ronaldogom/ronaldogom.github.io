@@ -126,25 +126,6 @@ void keyboard(unsigned char key, int x, int y)
     case 27:
       exit(0);
       break;
-    case 'a':
-      printf("%d, %d\n",x,y);
-      break;
-    case 'y':
-      eixoy = (eixoy + 5) % 360;
-      glutPostRedisplay();
-      break;
-    case 'Y':
-      eixoy = (eixoy - 5) % 360;
-      glutPostRedisplay();
-      break;
-    case 'x':
-      eixox = (eixox + 5) % 360;
-      glutPostRedisplay();
-      break;
-    case 'X':
-      eixox = (eixox - 5) % 360;
-      glutPostRedisplay();
-      break;
     case 'p':
       glLoadIdentity();
       gluPerspective(65.0, (GLfloat) largura/(GLfloat) altura, 20.0, 120.0);

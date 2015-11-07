@@ -246,6 +246,12 @@ void display(void){
   glColor4f(0.65, 0.65, 0.65, 1.0);
   glBindTexture(GL_TEXTURE_2D,logo);
   glCallList(logotipo);
+
+  glTranslatef(-0.02,0.0,0.0);
+  glColor4f(0.65, 0.65, 0.65, 1.0);
+  glBindTexture(GL_TEXTURE_2D,logo);
+  glCallList(logotipo);
+
   glPopMatrix();
   // volta para a ultima transformacao
 
